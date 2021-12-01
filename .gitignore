@@ -18,3 +18,4 @@ timos.c
 iso/
 !isolinux.bin
 zig-cache
+build/
