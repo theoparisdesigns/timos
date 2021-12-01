@@ -1,21 +1,47 @@
-ENTRY(main__main)
+ENTRY(_start)
 
 SECTIONS {
-    .= 0x101000;
-    .text : {
-        *(.multiboot_header)
-        *(.text)
+    VGA_PTR = 0xb8000;
+	. = 0xb8000;
+	. += 80 * 25 * 2;
+
+    . = 1M;
+
+    .multiboot :
+	{
+		/* KEEP otherwise it gets garbage collected by linker */
+		KEEP(*(.multiboot))
+		. = ALIGN(4K);
+	}
+
+    .text :
+    {
+        *(.text .text.*)
+		. = ALIGN(4K);
     }
-    
-    .rodata : {
-        *(.data)
-    }
-    
-    .data : {
-        *(.data)
-    }
-    
-    .bss : {
-         *(.bss)
-    }
+
+    .rodata :
+	{
+		*(.rodata .rodata.*)
+		. = ALIGN(4K);
+	}
+
+	.data :
+	{
+		*(.data.rel.ro.local*) *(.data.rel.ro .data.rel.ro.*) *(.data.*)
+		. = ALIGN(4K);
+	}
+
+	.gdt :
+	{
+		*(.gdt)
+		. = ALIGN(4K);
+	}
+
+	.bss :
+	{
+		*(.bss .bss.*)
+		. = ALIGN(4K);
+	}
 }
+

@@ -39,7 +39,9 @@ mut:
 
 pub fn terminal_putentryat(mut terminal Terminal, c byte, x u16, y u16) {
 	index := y * terminal.vga_width + x
-	terminal.terminal_buffer[index] = vga_entry(c, terminal.terminal_color)
+	unsafe {
+		terminal.terminal_buffer[index] = vga_entry(c, terminal.terminal_color)
+	}
 }
 
 pub fn terminal_putchar(mut terminal Terminal, c byte) {
