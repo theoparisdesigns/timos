@@ -1,0 +1,10 @@
+FROM rust:alpine as builder
+
+COPY . /app
+
+RUN apk add --no-cache zip
+RUN cargo install cargo-xbuild && \
+     rustup component add rust-src
+
+WORKDIR /app
+CMD /app/make.sh

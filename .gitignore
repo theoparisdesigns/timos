@@ -1,0 +1,10 @@
+*.iso
+*.img
+target/
+tmp/
+.DS_Store
+*.env*
+*.log*
+!.env.example
+kernel.*.elf
+bootboot/
