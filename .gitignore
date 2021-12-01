@@ -1,0 +1,18 @@
+# Binaries for programs and plugins
+main
+timos
+timos.c
+*.exe
+*.exe~
+*.so
+*.dylib
+*.dll
+*.log*
+*.env*
+!.env.example
+.DS_Store
+*.iso
+*.o
+*.bin
+iso/
+!isolinux.bin
